@@ -4,7 +4,9 @@ internal sealed record InstallPlanItem(
     string Name,
     Func<InstallTarget, bool> IsInstalled,
     Func<HttpClient, Task<ResolvedPackage>> ResolvePackage,
-    Action<InstallTarget, ResolvedPackage, string> Install);
+    Action<InstallTarget, ResolvedPackage, string> Install,
+    bool IsEnabled = true,
+    Action<InstallTarget>? Cleanup = null);
 
 internal static class InstallPlan
 {
@@ -41,14 +43,10 @@ internal static class InstallPlan
             new(
                 "Straftat GunGame",
                 InstallationState.HasGunGame,
-                httpClient => ThunderstorePackageSource.ResolveAsync(
-                    httpClient,
-                    "Straftat GunGame",
-                    "Yeastmans",
-                    "GunGame",
-                    PackageKind.ThunderstoreDll,
-                    preferredDllName: "GunGameMod.dll"),
-                InstallThunderstoreDllToPluginsStep.Run),
+                _ => throw new InstallerException("Straftat GunGame is WIP and is disabled in this installer release."),
+                (_, _, _) => throw new InstallerException("Straftat GunGame is WIP and is disabled in this installer release."),
+                IsEnabled: false,
+                Cleanup: DisabledModCleanup.RemoveGunGame),
             new(
                 "MoreStrafts UISpawnAddon",
                 InstallationState.HasMoreStraftsUiSpawnAddon,

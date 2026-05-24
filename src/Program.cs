@@ -66,12 +66,26 @@ internal static class Program
             WriteLinuxLaunchHelp(target);
 
             var plan = InstallPlan.Create(targetPlatform, architecture);
-            var missingItems = plan.Where(item => !item.IsInstalled(target)).ToArray();
+
+            PrintSection("Disabled Mod Cleanup");
+            foreach (var item in plan.Where(item => !item.IsEnabled))
+            {
+                item.Cleanup?.Invoke(target);
+            }
+
+            var missingItems = plan.Where(item => item.IsEnabled && !item.IsInstalled(target)).ToArray();
 
             PrintSection("Install Check");
             foreach (var item in plan)
             {
-                PrintStatus(item.Name, item.IsInstalled(target));
+                if (item.IsEnabled)
+                {
+                    PrintStatus(item.Name, item.IsInstalled(target));
+                }
+                else
+                {
+                    PrintWipStatus(item.Name);
+                }
             }
 
             if (missingItems.Length == 0)
@@ -302,6 +316,24 @@ internal static class Program
         Console.Write("[DONE] ");
         Console.ResetColor();
         Console.WriteLine(message);
+    }
+
+    internal static void PrintRemoved(string message)
+    {
+        InstallerLog.Info($"Removed {message}");
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.Write("[FIX]  ");
+        Console.ResetColor();
+        Console.WriteLine($"Removed {message}");
+    }
+
+    private static void PrintWipStatus(string name)
+    {
+        InstallerLog.Info($"{name}: WIP disabled");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write("[WIP]  ");
+        Console.ResetColor();
+        Console.WriteLine($"{name,-27} disabled for this release");
     }
 
     private static void PrintError(string message)

@@ -140,7 +140,7 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
   <tr><td>BepInEx</td><td>Required plumbing with a badge.</td></tr>
   <tr><td>Mod Menu</td><td>The menu that admits things are happening.</td></tr>
   <tr><td>moreStrafts</td><td>Additional STRAFTAT behavior.</td></tr>
-  <tr><td>Straftat GunGame</td><td>A procedure for weapon bureaucracy.</td></tr>
+  <tr><td>Straftat GunGame</td><td>WIP. Disabled and removed by the current installer until it behaves.</td></tr>
   <tr><td>MoreStrafts UISpawnAddon</td><td>Button-adjacent decisions.</td></tr>
   <tr><td>Fancy</td><td>Visual manners.</td></tr>
   <tr><td>Straftat Cosmetics Bundle IC</td><td>Wardrobe evidence.</td></tr>
