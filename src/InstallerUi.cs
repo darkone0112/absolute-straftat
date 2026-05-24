@@ -304,6 +304,13 @@ internal sealed class InstallerWindow : Window
                 borderGif
             }
         };
+        layout.PointerReleased += (_, _) =>
+        {
+            if (resultPanel.IsVisible)
+            {
+                Close();
+            }
+        };
         borderGif.IsVisible = false;
         resultPanel.IsVisible = false;
         Content = new Border
