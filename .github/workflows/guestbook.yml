@@ -57,8 +57,8 @@ jobs:
             const imageUrl = cleanUrl(getField('Image URL'));
             const date = new Date().toISOString().slice(0, 10);
             const row = `  <tr><td>${date}</td><td>${name}</td><td>${title}</td><td>${message}</td></tr>`;
-            const card = imageUrl ? `    <td width="170" align="center">
-              <img src="${imageUrl}" width="150" alt="${title}"><br>
+            const card = imageUrl ? `    <td width="145" align="center">
+              <img src="${imageUrl}" width="128" alt="${title}"><br>
               <b>${title}</b><br>
               <sub>${name}</sub>
             </td>` : '';
@@ -96,19 +96,21 @@ jobs:
             };
             const buildGallery = (cards) => {
               if (cards.length === 0) {
-                return `<table border="0" cellpadding="8" cellspacing="0">
+                return `<div align="center">
+            <table border="0" cellpadding="8" cellspacing="0" align="center">
               <tr>
                 <td width="520" align="center">No hallway photos yet. This is administratively suspicious.</td>
               </tr>
-            </table>`;
+            </table>
+            </div>`;
               }
 
               const rows = [];
-              for (let i = 0; i < Math.min(cards.length, 15); i += 3) {
-                rows.push(`  <tr>\n${cards.slice(i, i + 3).join('\n')}\n  </tr>`);
+              for (let i = 0; i < Math.min(cards.length, 20); i += 4) {
+                rows.push(`  <tr>\n${cards.slice(i, i + 4).join('\n')}\n  </tr>`);
               }
 
-              return `<table border="0" cellpadding="8" cellspacing="0">\n${rows.join('\n')}\n</table>`;
+              return `<div align="center">\n<table border="0" cellpadding="8" cellspacing="0" align="center">\n${rows.join('\n')}\n</table>\n</div>`;
             };
 
             const path = 'README.md';
@@ -133,7 +135,9 @@ jobs:
             if (card) {
               const galleryPattern = new RegExp(`${galleryStart}[\\s\\S]*?${galleryEnd}`);
               const gallerySection = readme.match(galleryPattern)[0];
-              const cards = [card, ...Array.from(gallerySection.matchAll(/    <td width="170" align="center">[\s\S]*?    <\/td>/g), match => match[0])];
+              const cards = [card, ...Array.from(gallerySection.matchAll(/    <td width="\d+" align="center">[\s\S]*?    <\/td>/g), match => match[0]
+                .replace(/width="\d+"/, 'width="145"')
+                .replace(/<img src="([^"]+)" width="\d+"/, '<img src="$1" width="128"'))];
               readme = readme.replace(galleryPattern, `${galleryStart}\n${buildGallery(cards)}\n${galleryEnd}`);
             }
             fs.writeFileSync(path, readme);

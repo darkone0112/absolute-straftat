@@ -231,32 +231,32 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 </div>
 
 <!-- GUESTBOOK_GALLERY:START -->
-<table border="0" cellpadding="8" cellspacing="0">
+<div align="center">
+<table border="0" cellpadding="8" cellspacing="0" align="center">
   <tr>
-    <td width="170" align="center">
-  <img src="https://pbs.twimg.com/media/Gz88HWUW0AAroPF?format=jpg&amp;name=small" width="150" alt="most likely to clikc install twice"><br>
-  <b>most likely to clikc install twice</b><br>
-  <sub>perrosanxe</sub>
-</td>
-    <td width="170" align="center">
-      <img src="assets/absolute.straftat.jpg" width="150" alt="Official first"><br>
+    <td width="145" align="center">
+      <img src="https://pbs.twimg.com/media/Gz88HWUW0AAroPF?format=jpg&amp;name=small" width="128" alt="most likely to clikc install twice"><br>
+      <b>most likely to clikc install twice</b><br>
+      <sub>perrosanxe</sub>
+    </td>
+    <td width="145" align="center">
+      <img src="assets/absolute.straftat.jpg" width="128" alt="Official first"><br>
       <b>Official first</b><br>
       <sub>site admin</sub>
     </td>
-    <td width="170" align="center">
-      <img src="assets/straftat-ico.jpg" width="150" alt="Installer installed me"><br>
+    <td width="145" align="center">
+      <img src="assets/straftat-ico.jpg" width="128" alt="Installer installed me"><br>
       <b>Installer installed me</b><br>
       <sub>xx_strafffer2007_xx</sub>
     </td>
-  </tr>
-  <tr>
-    <td width="170" align="center">
-      <img src="assets/communication.gif" width="150" alt="Empty desk"><br>
+    <td width="145" align="center">
+      <img src="assets/communication.gif" width="128" alt="Empty desk"><br>
       <b>Empty desk</b><br>
       <sub>waiting for yearbook evidence</sub>
     </td>
   </tr>
 </table>
+</div>
 <!-- GUESTBOOK_GALLERY:END -->
 
 <div align="center">
