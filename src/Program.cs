@@ -20,6 +20,7 @@ internal static class Program
             PrintInfo("Platform", platform.GitHubAssetName);
 
             using var httpClient = new HttpClient();
+            httpClient.Timeout = TimeSpan.FromSeconds(30);
             httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("absolute-straftat-installer");
 
             if (await BonjourUpdater.TryUpdateAndRelaunchAsync(httpClient, platform, args, options.SkipUpdate))

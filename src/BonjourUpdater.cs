@@ -8,6 +8,8 @@ namespace AbsoluteStraftat.Installer;
 internal static class BonjourUpdater
 {
     private const string Repository = "darkone0112/absolute-straftat";
+    private static readonly TimeSpan UpdateCheckTimeout = TimeSpan.FromSeconds(5);
+    private static readonly TimeSpan UpdateDownloadTimeout = TimeSpan.FromSeconds(20);
 
     public static async Task<bool> TryUpdateAndRelaunchAsync(
         HttpClient httpClient,
@@ -31,27 +33,22 @@ internal static class BonjourUpdater
             return false;
         }
 
-        var latestRelease = await TryGetLatestReleaseAsync(httpClient);
-        if (latestRelease is null)
-        {
-            Program.PrintUpdate("bonjour found no release desk. Continuing with the local copy.");
-            return false;
-        }
+        var latestRelease = await TryWithTimeoutAsync(
+            TryGetLatestReleaseAsync(httpClient, CancellationToken.None),
+            UpdateCheckTimeout,
+            "bonjour update check timed out. Continuing with the local copy.");
 
         var currentVersion = CurrentVersion();
         var expectedAssetName = platform.Kind == OperatingSystemKind.Windows
             ? "absolute-straftat-installer.exe"
             : "absolute-straftat-installer";
-        var asset = latestRelease.Assets.FirstOrDefault(asset =>
-            asset.Name.Equals(expectedAssetName, StringComparison.OrdinalIgnoreCase));
+        var directAssetUrl = new Uri($"https://github.com/{Repository}/releases/latest/download/{expectedAssetName}");
+        var directManifestUrl = new Uri($"https://github.com/{Repository}/releases/latest/download/bonjour-manifest.json");
 
-        if (asset is null)
-        {
-            Program.PrintUpdate($"bonjour requested {expectedAssetName}, but the release table declined to provide it.");
-            return false;
-        }
-
-        var manifest = await TryGetManifestAsync(httpClient, latestRelease);
+        var manifest = await TryWithTimeoutAsync(
+            TryGetManifestAsync(httpClient, directManifestUrl, CancellationToken.None),
+            UpdateCheckTimeout,
+            "bonjour manifest check timed out. Continuing with version comparison.");
         if (manifest is not null && manifest.TryGetAssetHash(expectedAssetName, out var expectedHash))
         {
             var currentHash = await ComputeSha256Async(currentExecutable!);
@@ -61,6 +58,11 @@ internal static class BonjourUpdater
                 return false;
             }
         }
+        else if (latestRelease is null)
+        {
+            Program.PrintUpdate("bonjour found no release desk. Continuing with the local copy.");
+            return false;
+        }
         else if (!IsNewer(latestRelease.TagName, currentVersion))
         {
             Program.PrintUpdate($"bonjour says this installer is fresh enough: {currentVersion}.");
@@ -68,9 +70,19 @@ internal static class BonjourUpdater
         }
 
         var tempPath = Path.Combine(Path.GetTempPath(), $"bonjour-{Guid.NewGuid():N}-{expectedAssetName}");
-        Program.PrintUpdate($"new installer detected: {currentVersion} -> {latestRelease.TagName}.");
+        Program.PrintUpdate(latestRelease is null
+            ? $"replacement installer detected by manifest hash: {currentVersion} -> latest."
+            : $"new installer detected: {currentVersion} -> {latestRelease.TagName}.");
         Program.PrintUpdate("bonjour is downloading the replacement form.");
-        await DownloadAsync(httpClient, asset.DownloadUrl, tempPath);
+        var downloaded = await TryWithTimeoutAsync(
+            DownloadAsync(httpClient, directAssetUrl, tempPath, CancellationToken.None),
+            UpdateDownloadTimeout,
+            "bonjour download timed out. Continuing with the local copy.");
+        if (!downloaded)
+        {
+            TryDelete(tempPath);
+            return false;
+        }
 
         if (!OperatingSystem.IsWindows())
         {
@@ -96,19 +108,22 @@ internal static class BonjourUpdater
             || fileName.Equals("absolute-straftat-installer", StringComparison.OrdinalIgnoreCase);
     }
 
-    private static async Task<GitHubRelease?> TryGetLatestReleaseAsync(HttpClient httpClient)
+    private static async Task<GitHubRelease?> TryGetLatestReleaseAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         try
         {
-            using var response = await httpClient.GetAsync($"https://api.github.com/repos/{Repository}/releases/latest");
+            using var response = await httpClient.GetAsync(
+                $"https://api.github.com/repos/{Repository}/releases/latest",
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 Program.PrintUpdate($"bonjour got a GitHub refusal: {(int)response.StatusCode} {response.ReasonPhrase}.");
                 return null;
             }
 
-            await using var stream = await response.Content.ReadAsStreamAsync();
-            using var document = await JsonDocument.ParseAsync(stream);
+            await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+            using var document = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken);
             var tagName = document.RootElement.GetProperty("tag_name").GetString();
             if (string.IsNullOrWhiteSpace(tagName))
             {
@@ -138,19 +153,22 @@ internal static class BonjourUpdater
         }
     }
 
-    private static async Task<BonjourManifest?> TryGetManifestAsync(HttpClient httpClient, GitHubRelease release)
+    private static async Task<BonjourManifest?> TryGetManifestAsync(HttpClient httpClient, Uri manifestUrl, CancellationToken cancellationToken)
     {
-        var manifestAsset = release.Assets.FirstOrDefault(asset =>
-            asset.Name.Equals("bonjour-manifest.json", StringComparison.OrdinalIgnoreCase));
-        if (manifestAsset is null)
-        {
-            return null;
-        }
-
         try
         {
-            await using var stream = await httpClient.GetStreamAsync(manifestAsset.DownloadUrl);
-            using var document = await JsonDocument.ParseAsync(stream);
+            using var response = await httpClient.GetAsync(
+                manifestUrl,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken);
+            if (!response.IsSuccessStatusCode)
+            {
+                Program.PrintUpdate($"bonjour could not read the release manifest: {(int)response.StatusCode} {response.ReasonPhrase}");
+                return null;
+            }
+
+            await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+            using var document = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken);
             if (!document.RootElement.TryGetProperty("assets", out var assetsElement))
             {
                 return null;
@@ -212,11 +230,53 @@ internal static class BonjourUpdater
         return value.Trim().TrimStart('v', 'V').Split('-')[0];
     }
 
-    private static async Task DownloadAsync(HttpClient httpClient, Uri downloadUrl, string destinationPath)
+    private static async Task<bool> DownloadAsync(HttpClient httpClient, Uri downloadUrl, string destinationPath, CancellationToken cancellationToken)
     {
-        await using var source = await httpClient.GetStreamAsync(downloadUrl);
-        await using var destination = File.Create(destinationPath);
-        await source.CopyToAsync(destination);
+        try
+        {
+            using var response = await httpClient.GetAsync(
+                downloadUrl,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken);
+            response.EnsureSuccessStatusCode();
+
+            await using var source = await response.Content.ReadAsStreamAsync(cancellationToken);
+            await using var destination = File.Create(destinationPath);
+            await source.CopyToAsync(destination, cancellationToken);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Program.PrintUpdate($"bonjour could not download the replacement form: {ex.Message}");
+            return false;
+        }
+    }
+
+    private static async Task<T?> TryWithTimeoutAsync<T>(Task<T> task, TimeSpan timeout, string timeoutMessage)
+    {
+        var completed = await Task.WhenAny(task, Task.Delay(timeout));
+        if (completed != task)
+        {
+            Program.PrintUpdate(timeoutMessage);
+            return default;
+        }
+
+        return await task;
+    }
+
+    private static void TryDelete(string path)
+    {
+        try
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+        catch
+        {
+            // Failed update cleanup should not block the installer.
+        }
     }
 
     private static void RelaunchThroughHelper(string currentExecutable, string downloadedExecutable, string[] originalArgs)
