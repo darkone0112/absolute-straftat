@@ -32,7 +32,7 @@
     <EmbeddedResource Include="..\assets\exit.gif" LogicalName="exit.gif" />
     <EmbeddedResource Include="..\assets\hop-on-straftat-straftat.gif" LogicalName="hop-on-straftat-straftat.gif" />
     <EmbeddedResource Include="..\assets\straftat-ico.jpg" LogicalName="straftat-ico.jpg" />
-    <EmbeddedResource Include="..\controller\bin\$(Configuration)\netstandard2.0\AbsoluteStraftatController.dll" LogicalName="AbsoluteStraftatController.dll" />
+    <EmbeddedResource Include="..\controller\bin\$(Configuration)\net472\AbsoluteStraftatController.dll" LogicalName="AbsoluteStraftatController.dll" />
   </ItemGroup>
 
   <ItemGroup>
