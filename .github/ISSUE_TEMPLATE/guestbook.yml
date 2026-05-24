@@ -1,0 +1,22 @@
+name: Guestbook Entry
+description: Sign the Absolute STRAFTAT guestbook.
+title: "Guestbook: "
+labels:
+  - guestbook
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The name that should appear in the README guestbook.
+      placeholder: xX_Strafter_2007_Xx
+    validations:
+      required: true
+  - type: textarea
+    id: message
+    attributes:
+      label: Message
+      description: Keep it readable. The committee is tired.
+      placeholder: I installed the installer and the installer installed me.
+    validations:
+      required: true

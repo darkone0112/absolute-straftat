@@ -8,6 +8,8 @@ on:
     branches:
       - main
       - master
+    paths-ignore:
+      - README.md
   pull_request:
   workflow_dispatch:
 
@@ -38,8 +40,8 @@ jobs:
 
       - name: Publish
         run: |
-          VERSION="0.0.0"
-          INFO_VERSION="${GITHUB_SHA}"
+          VERSION="0.1.${GITHUB_RUN_NUMBER}"
+          INFO_VERSION="v${VERSION}"
 
           dotnet publish src/AbsoluteStraftat.Installer.csproj \
             --configuration Release \
@@ -60,7 +62,7 @@ jobs:
           path: ${{ matrix.artifact-path }}
 
   release:
-    name: Update bonjour release
+    name: Publish Absolute STRAFTAT release
     needs: build
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
@@ -100,16 +102,19 @@ jobs:
           }
           EOF
 
-      - name: Create or update bonjour release
+      - name: Create or update Absolute STRAFTAT release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG="bonjour-latest"
-          TITLE="Bonjour latest installers"
-          BODY="Automatic installer release from ${GITHUB_SHA}."
+          VERSION="0.1.${GITHUB_RUN_NUMBER}"
+          TAG="v${VERSION}"
+          TITLE="Absolute STRAFTAT ${TAG}"
+          BODY="Automatic Absolute STRAFTAT installer release from ${GITHUB_SHA}."
 
-          git tag -f "$TAG"
-          git push origin "refs/tags/${TAG}" --force
+          if ! git rev-parse "$TAG" >/dev/null 2>&1; then
+            git tag "$TAG"
+            git push origin "refs/tags/${TAG}"
+          fi
 
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release edit "$TAG" --title "$TITLE" --notes "$BODY" --latest
