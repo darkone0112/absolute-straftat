@@ -1,40 +1,56 @@
 <div align="center">
 
-<img src="assets/border.gif" width="100%" alt="">
-
-# ABSOLUTE STRAFTAT
-
-<img src="assets/absolute.straftat.jpg" width="420" alt="Absolute STRAFTAT">
+<img src="assets/funny-light-top.gif" width="100%" alt="">
 
 <br>
 
-<img src="assets/communication.gif" alt=""> <b>installer page last inspected by a committee with no chairperson</b> <img src="assets/communication.gif" alt="">
+<img src="assets/welcome.gif" width="320" alt="Welcome">
+
+# ABSOLUTE STRAFTAT
+
+<table>
+  <tr>
+    <td><img src="assets/blue_flame_skull.gif" width="92" alt=""></td>
+    <td>
+      <img src="assets/bg.jpg" width="620" alt=""><br>
+      <img src="assets/absolute.straftat.jpg" width="430" alt="Absolute STRAFTAT">
+    </td>
+    <td><img src="assets/dino-magic-ball.gif" width="92" alt=""></td>
+  </tr>
+</table>
+
+<img src="assets/funny-light-mid-1.gift.gif" width="46%" alt="">
+<img src="assets/funny-light-mid-2.gift.gif" width="46%" alt="">
 
 <br><br>
 
 <table>
   <tr>
-    <td><img src="assets/exit.gif" width="88" alt=""></td>
+    <td><img src="assets/earth-world-spinning.gif" width="80" alt=""></td>
     <td>
       <b>WELCOME TO THE ABSOLUTE STRAFTAT INSTALLATION ZONE</b><br>
-      This page is optimized for monitors that have made peace with uncertainty.<br>
-      Download the latest release. Run the installer. Allow the folder to reach a conclusion.
+      Download the latest release. Run the installer. The folder will be asked several questions.
     </td>
-    <td><img src="assets/exit.gif" width="88" alt=""></td>
+    <td><img src="assets/tallbike-001.gif" width="80" alt=""></td>
   </tr>
 </table>
 
 <br>
 
 <a href="https://github.com/darkone0112/absolute-straftat/releases/latest">
-  <img src="assets/absolute.straftat.gif" width="230" alt="Download latest Absolute STRAFTAT">
+  <img src="assets/absolute.straftat.gif" width="240" alt="Download latest Absolute STRAFTAT">
 </a>
 
 <br><br>
 
-<img src="assets/border.gif" width="100%" alt="">
+<img src="assets/funny-light-mid-2.gift.gif" width="100%" alt="">
 
 </div>
+
+<table>
+  <tr>
+    <td><img src="assets/ohoh.gif" width="120" alt=""></td>
+    <td>
 
 ## WHAT THIS INSTALLS
 
@@ -48,9 +64,20 @@
 | Fancy | Visual manners |
 | Straftat Cosmetics Bundle IC | Wardrobe evidence |
 
+    </td>
+    <td><img src="assets/blue_flame_skull.gif" width="120" alt=""></td>
+  </tr>
+</table>
+
+<div align="center">
+
+<img src="assets/funny-light-mid-1.gift.gif" width="100%" alt="">
+
+</div>
+
 ## RELEASES
 
-Releases are named like:
+<img src="assets/earth-world-spinning.gif" width="48" alt=""> Releases are named like:
 
 ```text
 Absolute STRAFTAT v0.1.<github-run-number>
@@ -58,13 +85,26 @@ Absolute STRAFTAT v0.1.<github-run-number>
 
 The updater helper is called `bonjour`, but the release is Absolute STRAFTAT because bonjour is only the clerk at the front desk.
 
+<div align="center">
+
+<img src="assets/dino-magic-ball.gif" width="90" alt="">
+<img src="assets/funny-light-mid-2.gift.gif" width="58%" alt="">
+<img src="assets/blue_flame_skull.gif" width="90" alt="">
+
+</div>
+
 ## GUESTBOOK
 
-Want your name in this extremely public table?
-
-<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml"><b>SIGN THE GUESTBOOK</b></a>
-
-The issue form writes to this README automatically and then quietly closes the issue.
+<table>
+  <tr>
+    <td><img src="assets/wow1-1.gif" width="90" alt="arrow pointing left"></td>
+    <td>
+      <a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml"><b>SIGN THE GUESTBOOK</b></a><br>
+      The issue form writes to this README automatically and then quietly closes the issue.
+    </td>
+    <td><img src="assets/communication.gif" alt=""></td>
+  </tr>
+</table>
 
 | Date | Name | Message |
 |---|---|---|
@@ -74,8 +114,15 @@ The issue form writes to this README automatically and then quietly closes the i
 
 <div align="center">
 
-<img src="assets/border.gif" width="100%" alt="">
+<img src="assets/funny-light-mid-1.gift.gif" width="48%" alt="">
+<img src="assets/funny-light-mid-2.gift.gif" width="48%" alt="">
 
-<sub>Best viewed in a window you forgot was open.</sub>
+<br><br>
+
+<img src="assets/explorer-banner.jpg" width="100%" alt="">
+
+<br>
+
+<sub>Best viewed in a window that was opened by accident.</sub>
 
 </div>
