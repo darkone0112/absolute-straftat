@@ -1,0 +1,121 @@
+name: Build installer
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build installers
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runtime: win-x64
+            artifact-name: absolute-straftat-installer-win-x64
+            artifact-path: artifacts/win-x64/absolute-straftat-installer.exe
+          - runtime: linux-x64
+            artifact-name: absolute-straftat-installer-linux-x64
+            artifact-path: artifacts/linux-x64/absolute-straftat-installer
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Publish
+        run: |
+          VERSION="0.0.0"
+          INFO_VERSION="${GITHUB_SHA}"
+
+          dotnet publish src/AbsoluteStraftat.Installer.csproj \
+            --configuration Release \
+            --runtime ${{ matrix.runtime }} \
+            --output artifacts/${{ matrix.runtime }} \
+            /p:DebugType=None \
+            /p:DebugSymbols=false \
+            /p:Version="$VERSION" \
+            /p:InformationalVersion="$INFO_VERSION"
+
+      - name: Remove debug symbols
+        run: find artifacts/${{ matrix.runtime }} -name "*.pdb" -delete
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact-name }}
+          path: ${{ matrix.artifact-path }}
+
+  release:
+    name: Update bonjour release
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+
+    steps:
+      - name: Download Windows installer
+        uses: actions/download-artifact@v4
+        with:
+          name: absolute-straftat-installer-win-x64
+          path: release
+
+      - name: Download Linux installer
+        uses: actions/download-artifact@v4
+        with:
+          name: absolute-straftat-installer-linux-x64
+          path: release
+
+      - name: Create bonjour manifest
+        run: |
+          WIN_SHA="$(sha256sum release/absolute-straftat-installer.exe | cut -d ' ' -f 1)"
+          LINUX_SHA="$(sha256sum release/absolute-straftat-installer | cut -d ' ' -f 1)"
+
+          cat > release/bonjour-manifest.json <<EOF
+          {
+            "commit": "${GITHUB_SHA}",
+            "assets": {
+              "absolute-straftat-installer.exe": {
+                "sha256": "${WIN_SHA}"
+              },
+              "absolute-straftat-installer": {
+                "sha256": "${LINUX_SHA}"
+              }
+            }
+          }
+          EOF
+
+      - name: Create or update bonjour release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="bonjour-latest"
+          TITLE="Bonjour latest installers"
+          BODY="Automatic installer release from ${GITHUB_SHA}."
+
+          git tag -f "$TAG"
+          git push origin "refs/tags/${TAG}" --force
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "$TITLE" --notes "$BODY" --latest
+          else
+            gh release create "$TAG" --title "$TITLE" --notes "$BODY" --latest
+          fi
+
+          gh release upload "$TAG" \
+            release/absolute-straftat-installer.exe \
+            release/absolute-straftat-installer \
+            release/bonjour-manifest.json \
+            --clobber

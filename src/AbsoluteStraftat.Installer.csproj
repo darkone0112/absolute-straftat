@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>absolute-straftat-installer</AssemblyName>
+    <RootNamespace>AbsoluteStraftat.Installer</RootNamespace>
+    <VersionPrefix>0.0.0</VersionPrefix>
+    <InformationalVersion>0.0.0-local</InformationalVersion>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <ApplicationIcon>..\assets\straftat.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\absolute.straftat.jpg" LogicalName="absolute.straftat.jpg" />
+    <EmbeddedResource Include="..\absolute.straftat.gif" LogicalName="absolute.straftat.gif" />
+    <EmbeddedResource Include="..\background.png" LogicalName="background.png" />
+    <EmbeddedResource Include="..\border.gif" LogicalName="border.gif" />
+    <EmbeddedResource Include="..\communication.gif" LogicalName="communication.gif" />
+    <EmbeddedResource Include="..\exit.gif" LogicalName="exit.gif" />
+    <EmbeddedResource Include="..\hop-on-straftat-straftat.gif" LogicalName="hop-on-straftat-straftat.gif" />
+    <EmbeddedResource Include="..\straftat-ico.jpg" LogicalName="straftat-ico.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.0.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+  </ItemGroup>
+
+</Project>

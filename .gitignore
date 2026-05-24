@@ -1,0 +1,15 @@
+bin/
+obj/
+artifacts/
+docs/
+reference/
+*.gif
+*.jpg
+*.jpeg
+*.png
+*.ico
+*.icns
+*.user
+*.suo
+.vs/
+TestResults/
