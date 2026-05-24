@@ -17,12 +17,6 @@
     <ApplicationIcon>..\assets\straftat.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <Target Name="BuildControllerPlugin" BeforeTargets="PrepareForBuild">
-    <MSBuild Projects="..\controller\AbsoluteStraftat.Controller.csproj"
-             Targets="Restore;Build"
-             Properties="Configuration=$(Configuration)" />
-  </Target>
-
   <ItemGroup>
     <EmbeddedResource Include="..\assets\absolute.straftat.jpg" LogicalName="absolute.straftat.jpg" />
     <EmbeddedResource Include="..\assets\absolute.straftat.gif" LogicalName="absolute.straftat.gif" />
@@ -32,7 +26,7 @@
     <EmbeddedResource Include="..\assets\exit.gif" LogicalName="exit.gif" />
     <EmbeddedResource Include="..\assets\hop-on-straftat-straftat.gif" LogicalName="hop-on-straftat-straftat.gif" />
     <EmbeddedResource Include="..\assets\straftat-ico.jpg" LogicalName="straftat-ico.jpg" />
-    <EmbeddedResource Include="..\controller\bin\$(Configuration)\net472\AbsoluteStraftatController.dll" LogicalName="AbsoluteStraftatController.dll" />
+    <EmbeddedResource Include="..\controller\prebuilt\AbsoluteStraftatController.dll" LogicalName="AbsoluteStraftatController.dll" />
   </ItemGroup>
 
   <ItemGroup>
