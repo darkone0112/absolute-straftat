@@ -40,6 +40,11 @@ internal static class InstallationState
             || HasPluginDirectory(target, "CosmeticBundles");
     }
 
+    public static bool HasAbsoluteStraftatController(InstallTarget target)
+    {
+        return HasPluginFile(target, "AbsoluteStraftatController.dll");
+    }
+
     private static bool HasPluginFile(InstallTarget target, string fileName)
     {
         if (!Directory.Exists(target.PluginsDirectory))

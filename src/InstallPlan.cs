@@ -81,7 +81,15 @@ internal static class InstallPlan
                     "ImmortalChickens",
                     "Straftat_Cosmetics_Bundle_IC",
                     PackageKind.ThunderstoreFolder),
-                InstallThunderstoreFolderPackageToPluginsStep.Run)
+                InstallThunderstoreFolderPackageToPluginsStep.Run),
+            new(
+                "Absolute STRAFTAT Controller",
+                InstallationState.HasAbsoluteStraftatController,
+                _ => EmbeddedPluginSource.ResolveAsync(
+                    "Absolute STRAFTAT Controller",
+                    "0.1.0",
+                    "AbsoluteStraftatController.dll"),
+                InstallDllToPluginsStep.Run)
         };
     }
 }

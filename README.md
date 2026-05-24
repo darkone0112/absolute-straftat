@@ -144,6 +144,7 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
   <tr><td>MoreStrafts UISpawnAddon</td><td>Button-adjacent decisions.</td></tr>
   <tr><td>Fancy</td><td>Visual manners.</td></tr>
   <tr><td>Straftat Cosmetics Bundle IC</td><td>Wardrobe evidence.</td></tr>
+  <tr><td>Absolute STRAFTAT Controller</td><td>A tiny in-game Mod Menu test desk for live config poking.</td></tr>
 </table>
 
     </td>

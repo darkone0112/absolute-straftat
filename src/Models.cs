@@ -12,6 +12,7 @@ internal enum PackageKind
 {
     BepInEx,
     GitHubDll,
+    EmbeddedDll,
     ThunderstoreZip,
     ThunderstoreDll,
     ThunderstoreFolder
