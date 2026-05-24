@@ -1,5 +1,9 @@
 <div align="center">
 
+<img src="assets/sign-guest-book-1.gif" width="260" alt="Sign the guestbook">
+
+<br>
+
 <table border="0" cellpadding="4" cellspacing="0">
   <tr>
     <td width="260" align="center">
@@ -27,6 +31,12 @@
 <br>
 
 <img src="assets/welcome.gif" width="320" alt="Welcome">
+
+<br>
+
+<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
+  <img src="assets/sign-guest-book-1.gif" width="190" alt="Sign the guestbook">
+</a>
 
 # ABSOLUTE STRAFTAT
 
@@ -89,6 +99,12 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
 <img src="assets/funny-light-mid-1.gift.gif" width="49%" alt="">
 <img src="assets/funny-light-mid-2.gift.gif" width="49%" alt="">
 
+<br>
+
+<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
+  <img src="assets/sign-guest-book-1.gif" width="210" alt="Sign the guestbook">
+</a>
+
 </div>
 
 <table border="0" cellpadding="4" cellspacing="0">
@@ -117,6 +133,9 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
 <div align="center">
 
 <img src="assets/ohoh.gif" width="170" alt="">
+<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
+  <img src="assets/sign-guest-book-1.gif" width="190" alt="Sign the guestbook">
+</a>
 <img src="assets/communication.gif" alt="">
 <img src="assets/ohoh.gif" width="170" alt="">
 
@@ -164,12 +183,21 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 <div align="center">
 
 <img src="assets/dino-magic-ball.gif" width="90" alt="">
+<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
+  <img src="assets/sign-guest-book-1.gif" width="180" alt="Sign the guestbook">
+</a>
 <img src="assets/funny-light-mid-2.gift.gif" width="58%" alt="">
 <img src="assets/blue_flame_skull.gif" width="90" alt="">
 
 </div>
 
 ## GUESTBOOK
+
+<div align="center">
+  <a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
+    <img src="assets/sign-guest-book-1.gif" width="280" alt="Sign the guestbook">
+  </a>
+</div>
 
 <table border="0" cellpadding="4" cellspacing="0">
   <tr>
