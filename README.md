@@ -1,6 +1,22 @@
 <div align="center">
 
-<img src="assets/funny-light-top.gif" width="100%" alt="">
+<table>
+  <tr>
+    <td>
+      <a href="https://github.com/darkone0112/absolute-straftat/releases/latest/download/absolute-straftat-installer.exe">
+        <img src="assets/absolute.straftat.gif" width="230" alt="Download for Windows">
+      </a><br>
+      <b>WINDOWS .EXE</b>
+    </td>
+    <td width="40"></td>
+    <td>
+      <a href="https://github.com/darkone0112/absolute-straftat/releases/latest/download/absolute-straftat-installer">
+        <img src="assets/absolute.straftat.gif" width="230" alt="Download for Linux">
+      </a><br>
+      <b>LINUX</b>
+    </td>
+  </tr>
+</table>
 
 <br>
 
@@ -44,6 +60,59 @@
 <br><br>
 
 <img src="assets/funny-light-mid-2.gift.gif" width="100%" alt="">
+
+</div>
+
+<table>
+  <tr>
+    <td><img src="assets/blue_flame_skull.gif" width="110" alt=""></td>
+    <td>
+
+## WHAT IS THIS
+
+Absolute STRAFTAT is the installer that does the folder chores while you stand nearby looking technically involved.
+
+It finds STRAFTAT, checks whether the required mod pile is already there, downloads only what is missing, and places the files into `BepInEx/plugins` with the confidence of a printer that has never jammed.
+
+    </td>
+    <td><img src="assets/dino-magic-ball.gif" width="110" alt=""></td>
+  </tr>
+</table>
+
+<div align="center">
+
+<img src="assets/funny-light-mid-1.gift.gif" width="49%" alt="">
+<img src="assets/funny-light-mid-2.gift.gif" width="49%" alt="">
+
+</div>
+
+<table>
+  <tr>
+    <td><img src="assets/earth-world-spinning.gif" width="96" alt=""></td>
+    <td>
+
+## HOW TO USE IT WITHOUT BECOMING A SYSTEM ADMINISTRATOR
+
+| Step | Official Instruction | What You Actually Do |
+|---|---|---|
+| 1 | Select your executable specimen | Click the Windows or Linux download button at the top |
+| 2 | Place it somewhere emotionally stable | Downloads folder is acceptable; desktop is very legal |
+| 3 | Run the installer | Double click on Windows, run the Linux file on Linux |
+| 4 | If STRAFTAT is not found | Paste the game folder when asked, like a responsible witness |
+| 5 | Wait briefly | The installer checks files, downloads missing items, and avoids speeches |
+| 6 | Close the popup | Press the animated button after the page has made its point |
+| 7 | Launch STRAFTAT | Observe results; do not negotiate with the plugins folder |
+
+    </td>
+    <td><img src="assets/tallbike-001.gif" width="96" alt=""></td>
+  </tr>
+</table>
+
+<div align="center">
+
+<img src="assets/ohoh.gif" width="170" alt="">
+<img src="assets/communication.gif" alt="">
+<img src="assets/ohoh.gif" width="170" alt="">
 
 </div>
 
