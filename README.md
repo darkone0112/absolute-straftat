@@ -206,6 +206,7 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
     <th width="170">Title</th>
     <th width="310">Message</th>
   </tr>
+  <tr><td>2026-05-24</td><td>perrosanxe</td><td>most likely to clikc install twice</td><td>diego deigo di</td></tr>
   <tr><td>2026-05-24</td><td>xx_strafffer2007_xx</td><td>Installer installed me</td><td>I installed the installer and the installer installed me</td></tr>
   <tr><td>1999-12-31</td><td>site admin</td><td>Official first</td><td>first. this table has legal weight in zero jurisdictions.</td></tr>
 </table>
@@ -233,6 +234,11 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 <table border="0" cellpadding="8" cellspacing="0">
   <tr>
     <td width="170" align="center">
+  <img src="https://pbs.twimg.com/media/Gz88HWUW0AAroPF?format=jpg&amp;name=small" width="150" alt="most likely to clikc install twice"><br>
+  <b>most likely to clikc install twice</b><br>
+  <sub>perrosanxe</sub>
+</td>
+    <td width="170" align="center">
       <img src="assets/absolute.straftat.jpg" width="150" alt="Official first"><br>
       <b>Official first</b><br>
       <sub>site admin</sub>
@@ -242,6 +248,8 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
       <b>Installer installed me</b><br>
       <sub>xx_strafffer2007_xx</sub>
     </td>
+  </tr>
+  <tr>
     <td width="170" align="center">
       <img src="assets/communication.gif" width="150" alt="Empty desk"><br>
       <b>Empty desk</b><br>
