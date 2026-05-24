@@ -234,25 +234,35 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 <div align="center">
 <table border="0" cellpadding="8" cellspacing="0" align="center">
   <tr>
-    <td width="145" align="center">
-      <img src="https://pbs.twimg.com/media/Gz88HWUW0AAroPF?format=jpg&amp;name=small" width="128" alt="most likely to clikc install twice"><br>
+    <td width="105" align="center">
+      <img src="https://pbs.twimg.com/media/Gz88HWUW0AAroPF?format=jpg&amp;name=small" width="96" alt="most likely to clikc install twice"><br>
       <b>most likely to clikc install twice</b><br>
       <sub>perrosanxe</sub>
     </td>
-    <td width="145" align="center">
-      <img src="assets/absolute.straftat.jpg" width="128" alt="Official first"><br>
+    <td width="105" align="center">
+      <img src="assets/absolute.straftat.jpg" width="96" alt="Official first"><br>
       <b>Official first</b><br>
       <sub>site admin</sub>
     </td>
-    <td width="145" align="center">
-      <img src="assets/straftat-ico.jpg" width="128" alt="Installer installed me"><br>
+    <td width="105" align="center">
+      <img src="assets/straftat-ico.jpg" width="96" alt="Installer installed me"><br>
       <b>Installer installed me</b><br>
       <sub>xx_strafffer2007_xx</sub>
     </td>
-    <td width="145" align="center">
-      <img src="assets/communication.gif" width="128" alt="Empty desk"><br>
+    <td width="105" align="center">
+      <img src="assets/communication.gif" width="96" alt="Empty desk"><br>
       <b>Empty desk</b><br>
       <sub>waiting for yearbook evidence</sub>
+    </td>
+    <td width="105" align="center">
+      <img src="assets/ohoh.gif" width="96" alt="Empty desk two"><br>
+      <b>Empty desk two</b><br>
+      <sub>unclaimed yearbook chair</sub>
+    </td>
+    <td width="105" align="center">
+      <img src="assets/dino-magic-ball.gif" width="96" alt="Empty desk three"><br>
+      <b>Empty desk three</b><br>
+      <sub>awaiting visual paperwork</sub>
     </td>
   </tr>
 </table>
