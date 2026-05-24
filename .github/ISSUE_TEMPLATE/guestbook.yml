@@ -20,3 +20,19 @@ body:
       placeholder: I installed the installer and the installer installed me.
     validations:
       required: true
+  - type: input
+    id: title
+    attributes:
+      label: Yearbook Title
+      description: Short title for your extremely official guestbook photo.
+      placeholder: Most likely to click install twice
+    validations:
+      required: false
+  - type: input
+    id: image_url
+    attributes:
+      label: Image URL
+      description: Optional direct image URL for the high school photo wall. Use https:// and an image that can be shown in a README.
+      placeholder: https://example.com/my-photo.gif
+    validations:
+      required: false

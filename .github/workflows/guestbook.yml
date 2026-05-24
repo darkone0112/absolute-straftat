@@ -39,11 +39,29 @@ jobs:
               .replace(/>/g, '&gt;')
               .replace(/"/g, '&quot;')
               .slice(0, 220);
+            const cleanUrl = (value) => {
+              const trimmed = value.trim();
+              if (!/^https:\/\/[^\s<>"']+$/i.test(trimmed)) {
+                return '';
+              }
+
+              return trimmed
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .slice(0, 500);
+            };
 
             const name = clean(getField('Name') || context.payload.issue.user.login);
             const message = clean(getField('Message') || 'Signed without incident.');
+            const title = clean(getField('Yearbook Title') || 'Untitled hallway incident.');
+            const imageUrl = cleanUrl(getField('Image URL'));
             const date = new Date().toISOString().slice(0, 10);
-            const row = `  <tr><td>${date}</td><td>${name}</td><td>${message}</td></tr>`;
+            const row = `  <tr><td>${date}</td><td>${name}</td><td>${title}</td><td>${message}</td></tr>`;
+            const card = imageUrl ? `    <td width="170" align="center">
+              <img src="${imageUrl}" width="150" alt="${title}"><br>
+              <b>${title}</b><br>
+              <sub>${name}</sub>
+            </td>` : '';
 
             const buildPage = (rows, page, open) => `<details${open ? ' open' : ''}>
             <summary><b>Guestbook Page ${page}: ${page === 1 ? 'freshly signed municipal nonsense' : 'archived desk tapping'}</b></summary>
@@ -52,7 +70,8 @@ jobs:
               <tr>
                 <th width="110">Date</th>
                 <th width="180">Name</th>
-                <th width="420">Message</th>
+                <th width="170">Title</th>
+                <th width="310">Message</th>
               </tr>
             ${rows.join('\n')}
             </table>
@@ -75,20 +94,48 @@ jobs:
               }
               return pages.join('\n\n');
             };
+            const buildGallery = (cards) => {
+              if (cards.length === 0) {
+                return `<table border="0" cellpadding="8" cellspacing="0">
+              <tr>
+                <td width="520" align="center">No hallway photos yet. This is administratively suspicious.</td>
+              </tr>
+            </table>`;
+              }
+
+              const rows = [];
+              for (let i = 0; i < Math.min(cards.length, 15); i += 3) {
+                rows.push(`  <tr>\n${cards.slice(i, i + 3).join('\n')}\n  </tr>`);
+              }
+
+              return `<table border="0" cellpadding="8" cellspacing="0">\n${rows.join('\n')}\n</table>`;
+            };
 
             const path = 'README.md';
             let readme = fs.readFileSync(path, 'utf8');
             const start = '<!-- GUESTBOOK:START -->';
             const end = '<!-- GUESTBOOK:END -->';
+            const galleryStart = '<!-- GUESTBOOK_GALLERY:START -->';
+            const galleryEnd = '<!-- GUESTBOOK_GALLERY:END -->';
             if (!readme.includes(start) || !readme.includes(end)) {
               core.setFailed('README guestbook marker was not found.');
+              return;
+            }
+            if (!readme.includes(galleryStart) || !readme.includes(galleryEnd)) {
+              core.setFailed('README guestbook gallery marker was not found.');
               return;
             }
 
             const sectionPattern = new RegExp(`${start}[\\s\\S]*?${end}`);
             const section = readme.match(sectionPattern)[0];
-            const rows = [row, ...Array.from(section.matchAll(/  <tr><td>.*?<\/td><td>.*?<\/td><td>.*?<\/td><\/tr>/g), match => match[0])];
+            const rows = [row, ...Array.from(section.matchAll(/  <tr><td>.*?<\/td><td>.*?<\/td><td>.*?<\/td><td>.*?<\/td><\/tr>/g), match => match[0])];
             readme = readme.replace(sectionPattern, `${start}\n${buildPages(rows)}\n${end}`);
+            if (card) {
+              const galleryPattern = new RegExp(`${galleryStart}[\\s\\S]*?${galleryEnd}`);
+              const gallerySection = readme.match(galleryPattern)[0];
+              const cards = [card, ...Array.from(gallerySection.matchAll(/    <td width="170" align="center">[\s\S]*?    <\/td>/g), match => match[0])];
+              readme = readme.replace(galleryPattern, `${galleryStart}\n${buildGallery(cards)}\n${galleryEnd}`);
+            }
             fs.writeFileSync(path, readme);
 
       - name: Commit guestbook update

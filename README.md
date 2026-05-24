@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="assets/sign-guest-book-1.gif" width="260" alt="Sign the guestbook">
+<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
+  <img src="assets/sign-guest-book-1.gif" width="150" alt="Sign the guestbook">
+</a>
 
 <br>
 
@@ -31,12 +33,6 @@
 <br>
 
 <img src="assets/welcome.gif" width="320" alt="Welcome">
-
-<br>
-
-<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
-  <img src="assets/sign-guest-book-1.gif" width="190" alt="Sign the guestbook">
-</a>
 
 # ABSOLUTE STRAFTAT
 
@@ -99,12 +95,6 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
 <img src="assets/funny-light-mid-1.gift.gif" width="49%" alt="">
 <img src="assets/funny-light-mid-2.gift.gif" width="49%" alt="">
 
-<br>
-
-<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
-  <img src="assets/sign-guest-book-1.gif" width="210" alt="Sign the guestbook">
-</a>
-
 </div>
 
 <table border="0" cellpadding="4" cellspacing="0">
@@ -133,9 +123,6 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
 <div align="center">
 
 <img src="assets/ohoh.gif" width="170" alt="">
-<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
-  <img src="assets/sign-guest-book-1.gif" width="190" alt="Sign the guestbook">
-</a>
 <img src="assets/communication.gif" alt="">
 <img src="assets/ohoh.gif" width="170" alt="">
 
@@ -183,9 +170,6 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 <div align="center">
 
 <img src="assets/dino-magic-ball.gif" width="90" alt="">
-<a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
-  <img src="assets/sign-guest-book-1.gif" width="180" alt="Sign the guestbook">
-</a>
 <img src="assets/funny-light-mid-2.gift.gif" width="58%" alt="">
 <img src="assets/blue_flame_skull.gif" width="90" alt="">
 
@@ -195,7 +179,7 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 
 <div align="center">
   <a href="https://github.com/darkone0112/absolute-straftat/issues/new?template=guestbook.yml">
-    <img src="assets/sign-guest-book-1.gif" width="280" alt="Sign the guestbook">
+    <img src="assets/sign-guest-book-1.gif" width="190" alt="Sign the guestbook">
   </a>
 </div>
 
@@ -218,10 +202,11 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
   <tr>
     <th width="110">Date</th>
     <th width="180">Name</th>
-    <th width="420">Message</th>
+    <th width="170">Title</th>
+    <th width="310">Message</th>
   </tr>
-  <tr><td>2026-05-24</td><td>xx_strafffer2007_xx</td><td>I installed the installer and the installer installed me</td></tr>
-  <tr><td>1999-12-31</td><td>site admin</td><td>first. this table has legal weight in zero jurisdictions.</td></tr>
+  <tr><td>2026-05-24</td><td>xx_strafffer2007_xx</td><td>Installer installed me</td><td>I installed the installer and the installer installed me</td></tr>
+  <tr><td>1999-12-31</td><td>site admin</td><td>Official first</td><td>first. this table has legal weight in zero jurisdictions.</td></tr>
 </table>
 </details>
 
@@ -233,6 +218,37 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 </table>
 </details>
 <!-- GUESTBOOK:END -->
+
+## GUESTBOOK PHOTO WALL
+
+<div align="center">
+
+<img src="assets/funny-light-mid-1.gift.gif" width="46%" alt="">
+<img src="assets/funny-light-mid-2.gift.gif" width="46%" alt="">
+
+</div>
+
+<!-- GUESTBOOK_GALLERY:START -->
+<table border="0" cellpadding="8" cellspacing="0">
+  <tr>
+    <td width="170" align="center">
+      <img src="assets/absolute.straftat.jpg" width="150" alt="Official first"><br>
+      <b>Official first</b><br>
+      <sub>site admin</sub>
+    </td>
+    <td width="170" align="center">
+      <img src="assets/straftat-ico.jpg" width="150" alt="Installer installed me"><br>
+      <b>Installer installed me</b><br>
+      <sub>xx_strafffer2007_xx</sub>
+    </td>
+    <td width="170" align="center">
+      <img src="assets/communication.gif" width="150" alt="Empty desk"><br>
+      <b>Empty desk</b><br>
+      <sub>waiting for yearbook evidence</sub>
+    </td>
+  </tr>
+</table>
+<!-- GUESTBOOK_GALLERY:END -->
 
 <div align="center">
 
