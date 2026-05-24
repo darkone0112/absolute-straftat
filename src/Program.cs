@@ -8,6 +8,7 @@ internal static class Program
     {
         try
         {
+            InstallerLog.Info($"Started with args: {string.Join(' ', args)}");
             var options = InstallerOptions.Parse(args);
             if (options.ShowHelp)
             {
@@ -41,6 +42,7 @@ internal static class Program
             }
 
             gameDirectory = Path.GetFullPath(gameDirectory);
+            InstallerLog.AddGameDirectory(gameDirectory);
             PrintInfo("Game folder", gameDirectory);
 
             var detectedGameBinary = ArchitectureDetector.DetectGameBinary(gameDirectory);
@@ -60,6 +62,7 @@ internal static class Program
                 targetPlatform.Kind,
                 architecture);
 
+            PrintBepInExLoaderDiagnostics(target);
             WriteLinuxLaunchHelp(target);
 
             var plan = InstallPlan.Create(targetPlatform, architecture);
@@ -122,11 +125,14 @@ internal static class Program
         catch (InstallerException ex)
         {
             PrintError(ex.Message);
+            InstallerUi.ShowResult(false, "INSTALLER FELL DOWN", ex.Message);
             return 1;
         }
         catch (Exception ex)
         {
             PrintError($"Unexpected error: {ex.Message}");
+            InstallerLog.Error(ex.ToString());
+            InstallerUi.ShowResult(false, "UNEXPECTED FLOOR EVENT", ex.Message);
             return 1;
         }
     }
@@ -183,6 +189,38 @@ internal static class Program
             + "\n\nIf Mod Menu does not appear, Steam probably launched STRAFTAT without BepInEx.\n");
     }
 
+    private static void PrintBepInExLoaderDiagnostics(InstallTarget target)
+    {
+        var windowsLoader = File.Exists(Path.Combine(target.GameDirectory, "winhttp.dll"));
+        var windowsConfig = File.Exists(Path.Combine(target.GameDirectory, "doorstop_config.ini"));
+        var linuxLauncher = File.Exists(Path.Combine(target.GameDirectory, "run_bepinex.sh"));
+        var linuxLoader = File.Exists(Path.Combine(target.GameDirectory, "libdoorstop.so"));
+        var generatedConfig = Directory.Exists(Path.Combine(target.GameDirectory, "BepInEx", "config"));
+        var generatedCache = Directory.Exists(Path.Combine(target.GameDirectory, "BepInEx", "cache"));
+
+        PrintSection("BepInEx Loader Check");
+        PrintInfo("Expected loader", target.OperatingSystem == OperatingSystemKind.Windows ? "Windows/Proton" : "Native Linux");
+        PrintInfo("winhttp.dll", windowsLoader ? "present" : "missing");
+        PrintInfo("doorstop_config.ini", windowsConfig ? "present" : "missing");
+        PrintInfo("run_bepinex.sh", linuxLauncher ? "present" : "missing");
+        PrintInfo("libdoorstop.so", linuxLoader ? "present" : "missing");
+        PrintInfo("BepInEx/config", generatedConfig ? "present" : "not generated yet");
+        PrintInfo("BepInEx/cache", generatedCache ? "present" : "not generated yet");
+
+        if (target.OperatingSystem == OperatingSystemKind.Windows && !windowsLoader && linuxLauncher)
+        {
+            PrintInfo("Loader diagnosis", "Native Linux BepInEx appears to be in a Windows/Proton game folder. Reinstalling BepInEx should repair it.");
+        }
+        else if (target.OperatingSystem == OperatingSystemKind.Linux && !linuxLauncher && windowsLoader)
+        {
+            PrintInfo("Loader diagnosis", "Windows BepInEx appears to be in a native Linux game folder. Reinstalling BepInEx should repair it.");
+        }
+        else if (!generatedConfig || !generatedCache)
+        {
+            PrintInfo("Loader diagnosis", "BepInEx has not generated runtime folders yet. If files are installed, check Steam launch options.");
+        }
+    }
+
     private static void PrintLinuxLaunchNotice(InstallTarget target)
     {
         if (!OperatingSystem.IsLinux())
@@ -223,6 +261,7 @@ internal static class Program
 
     internal static void PrintSection(string title)
     {
+        InstallerLog.Info($"-- {title} --");
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine($"-- {title} --------------------------------");
@@ -231,6 +270,7 @@ internal static class Program
 
     private static void PrintStatus(string name, bool installed)
     {
+        InstallerLog.Info($"{name}: {(installed ? "installed" : "missing")}");
         Console.ForegroundColor = installed ? ConsoleColor.Green : ConsoleColor.Yellow;
         Console.Write(installed ? "[OK]   " : "[MISS] ");
         Console.ResetColor();
@@ -239,6 +279,7 @@ internal static class Program
 
     internal static void PrintInfo(string label, string value)
     {
+        InstallerLog.Info($"{label}: {value}");
         Console.ForegroundColor = ConsoleColor.DarkCyan;
         Console.Write("[INFO] ");
         Console.ResetColor();
@@ -247,6 +288,7 @@ internal static class Program
 
     internal static void PrintStep(string message)
     {
+        InstallerLog.Info(message);
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("[RUN]  ");
         Console.ResetColor();
@@ -255,6 +297,7 @@ internal static class Program
 
     internal static void PrintSuccess(string message)
     {
+        InstallerLog.Info(message);
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("[DONE] ");
         Console.ResetColor();
@@ -263,6 +306,7 @@ internal static class Program
 
     private static void PrintError(string message)
     {
+        InstallerLog.Error(message);
         Console.ForegroundColor = ConsoleColor.Red;
         Console.Error.Write("[ERR]  ");
         Console.ResetColor();
@@ -271,6 +315,7 @@ internal static class Program
 
     internal static void PrintUpdate(string message)
     {
+        InstallerLog.Info($"bonjour: {message}");
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.Write("[BONJ] ");
         Console.ResetColor();

@@ -10,6 +10,7 @@ internal static class PackageDownloader
 
         if (package.Kind == PackageKind.EmbeddedDll)
         {
+            InstallerLog.Info($"Preparing bundled {package.Name} {package.Version}");
             Console.WriteLine($"Preparing bundled {package.Name} {package.Version}...");
             await using var embedded = Assembly.GetExecutingAssembly().GetManifestResourceStream(package.FileName)
                 ?? throw new InstallerException($"Missing embedded package resource: {package.FileName}");
@@ -18,6 +19,7 @@ internal static class PackageDownloader
             return;
         }
 
+        InstallerLog.Info($"Downloading {package.Name} {package.Version} from {package.DownloadUrl}");
         Console.WriteLine($"Downloading {package.Name} {package.Version}...");
         await using var source = await httpClient.GetStreamAsync(package.DownloadUrl);
         await using var destination = File.Create(destinationPath);

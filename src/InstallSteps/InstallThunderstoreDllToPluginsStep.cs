@@ -52,6 +52,7 @@ internal static class InstallThunderstoreDllToPluginsStep
     {
         var destinationPath = Path.Combine(destinationDirectory, Path.GetFileName(sourcePath));
         File.Copy(sourcePath, destinationPath, overwrite: true);
+        InstallerLog.Info($"Copied {packageName}: {destinationPath}");
         Console.WriteLine($"  Copied {packageName}: {Path.GetRelativePath(destinationDirectory, destinationPath)}");
     }
 }

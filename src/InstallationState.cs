@@ -4,8 +4,19 @@ internal static class InstallationState
 {
     public static bool HasBepInEx(InstallTarget target)
     {
-        return Directory.Exists(Path.Combine(target.GameDirectory, "BepInEx", "core"))
-            && Directory.Exists(Path.Combine(target.GameDirectory, "BepInEx", "plugins"));
+        if (!Directory.Exists(Path.Combine(target.GameDirectory, "BepInEx", "core"))
+            || !Directory.Exists(Path.Combine(target.GameDirectory, "BepInEx", "plugins")))
+        {
+            return false;
+        }
+
+        return target.OperatingSystem switch
+        {
+            OperatingSystemKind.Windows => File.Exists(Path.Combine(target.GameDirectory, "winhttp.dll")),
+            OperatingSystemKind.Linux => File.Exists(Path.Combine(target.GameDirectory, "run_bepinex.sh"))
+                && File.Exists(Path.Combine(target.GameDirectory, "libdoorstop.so")),
+            _ => false
+        };
     }
 
     public static bool HasModMenu(InstallTarget target)

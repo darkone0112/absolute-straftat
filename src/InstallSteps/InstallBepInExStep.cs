@@ -8,8 +8,10 @@ internal static class InstallBepInExStep
     {
         var zipPath = PackageDownloader.GetDownloadedPath(tempDirectory, package);
         var extractDirectory = Path.Combine(tempDirectory, "BepInEx");
+        InstallerLog.Info($"Extracting BepInEx from {zipPath}");
         ZipFile.ExtractToDirectory(zipPath, extractDirectory, overwriteFiles: true);
 
+        InstallerLog.Info($"Copying BepInEx files into {target.GameDirectory}");
         CopyDirectory(extractDirectory, target.GameDirectory);
         MakeUnixShellScriptsExecutable(target);
     }
@@ -43,6 +45,7 @@ internal static class InstallBepInExStep
             File.SetUnixFileMode(script, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute
                 | UnixFileMode.GroupRead | UnixFileMode.GroupExecute
                 | UnixFileMode.OtherRead | UnixFileMode.OtherExecute);
+            InstallerLog.Info($"Made executable: {script}");
         }
     }
 }

@@ -58,6 +58,7 @@ internal static class InstallThunderstoreFolderToPluginsStep
             var destinationPath = Path.Combine(destinationDirectory, relativePath);
             Directory.CreateDirectory(Path.GetDirectoryName(destinationPath)!);
             File.Copy(file, destinationPath, overwrite: true);
+            InstallerLog.Info($"Copied {packageName}: {destinationPath}");
             Console.WriteLine($"  Copied {packageName}: {Path.GetRelativePath(destinationDirectory, destinationPath)}");
         }
     }
@@ -66,6 +67,7 @@ internal static class InstallThunderstoreFolderToPluginsStep
     {
         var destinationPath = Path.Combine(destinationDirectory, Path.GetFileName(sourcePath));
         File.Copy(sourcePath, destinationPath, overwrite: true);
+        InstallerLog.Info($"Copied {packageName}: {destinationPath}");
         Console.WriteLine($"  Copied {packageName}: {Path.GetRelativePath(destinationDirectory, destinationPath)}");
     }
 }

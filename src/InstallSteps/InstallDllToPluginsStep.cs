@@ -9,6 +9,7 @@ internal static class InstallDllToPluginsStep
         var sourcePath = PackageDownloader.GetDownloadedPath(tempDirectory, package);
         var destinationPath = Path.Combine(target.PluginsDirectory, package.FileName);
         File.Copy(sourcePath, destinationPath, overwrite: true);
+        InstallerLog.Info($"Copied {package.Name}: {destinationPath}");
         Console.WriteLine($"  Copied {package.Name}: {Path.GetRelativePath(target.PluginsDirectory, destinationPath)}");
     }
 }
