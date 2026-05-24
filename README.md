@@ -1,6 +1,6 @@
 <div align="center">
 
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr>
     <td width="260" align="center">
       <a href="https://github.com/darkone0112/absolute-straftat/releases/latest/download/absolute-straftat-installer.exe">
@@ -30,7 +30,7 @@
 
 # ABSOLUTE STRAFTAT
 
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr>
     <td><img src="assets/blue_flame_skull.gif" width="92" alt=""></td>
     <td>
@@ -46,7 +46,7 @@
 
 <br><br>
 
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr>
     <td><img src="assets/earth-world-spinning.gif" width="80" alt=""></td>
     <td>
@@ -68,8 +68,7 @@
 <img src="assets/funny-light-mid-2.gift.gif" width="100%" alt="">
 
 </div>
-
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr>
     <td width="90"><img src="assets/blue_flame_skull.gif" width="80" alt=""></td>
     <td width="520">
@@ -92,14 +91,14 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
 
 </div>
 
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr>
     <td width="70"><img src="assets/earth-world-spinning.gif" width="64" alt=""></td>
     <td width="560">
 
 ## HOW TO USE IT WITHOUT BECOMING A SYSTEM ADMINISTRATOR
 
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr><th width="40">#</th><th width="190">Instruction</th><th width="300">Actual behavior</th></tr>
   <tr><td>1</td><td>Pick your system</td><td>Use Windows or Linux at the top.</td></tr>
   <tr><td>2</td><td>Download</td><td>Click the download GIF. It is legally a button.</td></tr>
@@ -123,14 +122,14 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
 
 </div>
 
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr>
     <td width="80"><img src="assets/ohoh.gif" width="72" alt=""></td>
     <td width="560">
 
 ## WHAT THIS INSTALLS
 
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr><th width="230">Object</th><th width="300">Official folder opinion</th></tr>
   <tr><td>BepInEx</td><td>Required plumbing with a badge.</td></tr>
   <tr><td>Mod Menu</td><td>The menu that admits things are happening.</td></tr>
@@ -172,7 +171,7 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 
 ## GUESTBOOK
 
-<table>
+<table border="0" cellpadding="4" cellspacing="0">
   <tr>
     <td><img src="assets/wow1-1.gif" width="90" alt="arrow pointing left"></td>
     <td>
@@ -183,11 +182,28 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
   </tr>
 </table>
 
-| Date | Name | Message |
-|---|---|---|
 <!-- GUESTBOOK:START -->
-| 2026-05-24 | xx_strafffer2007_xx | I installed the installer and the installer installed me |
-| 1999-12-31 | site admin | first. this table has legal weight in zero jurisdictions. |
+<details open>
+<summary><b>Guestbook Page 1: freshly signed municipal nonsense</b></summary>
+
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <th width="110">Date</th>
+    <th width="180">Name</th>
+    <th width="420">Message</th>
+  </tr>
+  <tr><td>2026-05-24</td><td>xx_strafffer2007_xx</td><td>I installed the installer and the installer installed me</td></tr>
+  <tr><td>1999-12-31</td><td>site admin</td><td>first. this table has legal weight in zero jurisdictions.</td></tr>
+</table>
+</details>
+
+<details>
+<summary><b>Guestbook Page 2: reserved for future desk tapping</b></summary>
+
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr><td width="710">When page 1 becomes too emotionally crowded, the archive department will pretend this was planned.</td></tr>
+</table>
+</details>
 <!-- GUESTBOOK:END -->
 
 <div align="center">

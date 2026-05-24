@@ -34,25 +34,61 @@ jobs:
             };
 
             const clean = (value) => value
-              .replace(/\|/g, '/')
+              .replace(/&/g, '&amp;')
               .replace(/</g, '&lt;')
               .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;')
               .slice(0, 220);
 
             const name = clean(getField('Name') || context.payload.issue.user.login);
             const message = clean(getField('Message') || 'Signed without incident.');
             const date = new Date().toISOString().slice(0, 10);
-            const row = `| ${date} | ${name} | ${message} |`;
+            const row = `  <tr><td>${date}</td><td>${name}</td><td>${message}</td></tr>`;
+
+            const buildPage = (rows, page, open) => `<details${open ? ' open' : ''}>
+            <summary><b>Guestbook Page ${page}: ${page === 1 ? 'freshly signed municipal nonsense' : 'archived desk tapping'}</b></summary>
+
+            <table border="0" cellpadding="6" cellspacing="0">
+              <tr>
+                <th width="110">Date</th>
+                <th width="180">Name</th>
+                <th width="420">Message</th>
+              </tr>
+            ${rows.join('\n')}
+            </table>
+            </details>`;
+
+            const buildPages = (rows) => {
+              const pageSize = 10;
+              const pages = [];
+              for (let i = 0; i < rows.length; i += pageSize) {
+                pages.push(buildPage(rows.slice(i, i + pageSize), pages.length + 1, pages.length === 0));
+              }
+              if (pages.length < 2) {
+                pages.push(`<details>
+            <summary><b>Guestbook Page 2: reserved for future desk tapping</b></summary>
+
+            <table border="0" cellpadding="6" cellspacing="0">
+              <tr><td width="710">When page 1 becomes too emotionally crowded, the archive department will pretend this was planned.</td></tr>
+            </table>
+            </details>`);
+              }
+              return pages.join('\n\n');
+            };
 
             const path = 'README.md';
             let readme = fs.readFileSync(path, 'utf8');
-            const marker = '<!-- GUESTBOOK:START -->';
-            if (!readme.includes(marker)) {
+            const start = '<!-- GUESTBOOK:START -->';
+            const end = '<!-- GUESTBOOK:END -->';
+            if (!readme.includes(start) || !readme.includes(end)) {
               core.setFailed('README guestbook marker was not found.');
               return;
             }
 
-            readme = readme.replace(marker, `${marker}\n${row}`);
+            const sectionPattern = new RegExp(`${start}[\\s\\S]*?${end}`);
+            const section = readme.match(sectionPattern)[0];
+            const rows = [row, ...Array.from(section.matchAll(/  <tr><td>.*?<\/td><td>.*?<\/td><td>.*?<\/td><\/tr>/g), match => match[0])];
+            readme = readme.replace(sectionPattern, `${start}\n${buildPages(rows)}\n${end}`);
             fs.writeFileSync(path, readme);
 
       - name: Commit guestbook update
