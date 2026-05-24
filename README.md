@@ -206,6 +206,7 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
     <th width="170">Title</th>
     <th width="310">Message</th>
   </tr>
+  <tr><td>2026-05-24</td><td>diego</td><td>_No response_</td><td>i really liked this mod , it works , absolute straftat!</td></tr>
   <tr><td>2026-05-24</td><td>perrosanxe</td><td>most likely to clikc install twice</td><td>diego deigo di</td></tr>
   <tr><td>2026-05-24</td><td>xx_strafffer2007_xx</td><td>Installer installed me</td><td>I installed the installer and the installer installed me</td></tr>
   <tr><td>1999-12-31</td><td>site admin</td><td>Official first</td><td>first. this table has legal weight in zero jurisdictions.</td></tr>
