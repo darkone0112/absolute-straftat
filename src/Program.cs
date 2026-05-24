@@ -15,15 +15,15 @@ internal static class Program
                 return 0;
             }
 
-            var platform = PlatformInfo.Current();
+            var installerPlatform = PlatformInfo.Current();
             PrintBanner();
-            PrintInfo("Platform", platform.GitHubAssetName);
+            PrintInfo("Installer platform", installerPlatform.GitHubAssetName);
 
             using var httpClient = new HttpClient();
             httpClient.Timeout = TimeSpan.FromSeconds(30);
             httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("absolute-straftat-installer");
 
-            if (await BonjourUpdater.TryUpdateAndRelaunchAsync(httpClient, platform, args, options.SkipUpdate))
+            if (await BonjourUpdater.TryUpdateAndRelaunchAsync(httpClient, installerPlatform, args, options.SkipUpdate))
             {
                 return 0;
             }
@@ -43,21 +43,26 @@ internal static class Program
             gameDirectory = Path.GetFullPath(gameDirectory);
             PrintInfo("Game folder", gameDirectory);
 
-            var architecture = options.GameArchitecture ?? ArchitectureDetector.Detect(gameDirectory) ?? RuntimeInformation.ProcessArchitecture;
+            var detectedGameBinary = ArchitectureDetector.DetectGameBinary(gameDirectory);
+            var targetPlatform = detectedGameBinary?.Platform ?? installerPlatform;
+            var architecture = options.GameArchitecture ?? detectedGameBinary?.Architecture ?? RuntimeInformation.ProcessArchitecture;
             if (architecture is not Architecture.X64 and not Architecture.X86)
             {
                 throw new InstallerException($"Unsupported architecture: {architecture}. Use --arch x64 or --arch x86.");
             }
 
+            PrintInfo("Game build", targetPlatform.GitHubAssetName);
             PrintInfo("Architecture", ArchitectureDetector.ToAssetName(architecture));
 
             var target = new InstallTarget(
                 gameDirectory,
                 Path.Combine(gameDirectory, "BepInEx", "plugins"),
-                platform.Kind,
+                targetPlatform.Kind,
                 architecture);
 
-            var plan = InstallPlan.Create(platform, architecture);
+            WriteLinuxLaunchHelp(target);
+
+            var plan = InstallPlan.Create(targetPlatform, architecture);
             var missingItems = plan.Where(item => !item.IsInstalled(target)).ToArray();
 
             PrintSection("Install Check");
@@ -70,6 +75,7 @@ internal static class Program
             {
                 PrintSection("Nothing To Do");
                 PrintSuccess("Everything is already installed.");
+                PrintLinuxLaunchNotice(target);
                 InstallerUi.ShowResult(options.NoPopup, "NO LABOR DETECTED", "All required files are already present. The situation has been reviewed and found suspiciously acceptable.");
                 return 0;
             }
@@ -107,6 +113,7 @@ internal static class Program
             PrintSection("Complete");
             PrintSuccess("Installation complete. The DLL paperwork has been accepted.");
             PrintInfo("Next step", "Launch STRAFTAT once so BepInEx can finish generating its config files.");
+            PrintLinuxLaunchNotice(target);
 
             InstallerUi.ShowResult(options.NoPopup, "INSTALLATION OPINION: YES", "The files are arranged in a way the committee currently accepts. Launch STRAFTAT and observe.");
 
@@ -152,6 +159,56 @@ internal static class Program
         Console.WriteLine("  --no-popup         Skip the completion window.");
         Console.WriteLine("  --skip-update      Skip bonjour self-update check.");
         Console.WriteLine("  --help             Show this help.");
+    }
+
+    private static void WriteLinuxLaunchHelp(InstallTarget target)
+    {
+        if (!OperatingSystem.IsLinux())
+        {
+            return;
+        }
+
+        var launchOption = GetLinuxLaunchOption(target);
+        if (launchOption is null)
+        {
+            return;
+        }
+
+        var helpPath = Path.Combine(target.GameDirectory, "ABSOLUTE_STRAFTAT_LINUX_LAUNCH_OPTIONS.txt");
+        File.WriteAllText(
+            helpPath,
+            "Steam > STRAFTAT > Properties > Launch Options\n"
+            + "Paste this line:\n\n"
+            + launchOption
+            + "\n\nIf Mod Menu does not appear, Steam probably launched STRAFTAT without BepInEx.\n");
+    }
+
+    private static void PrintLinuxLaunchNotice(InstallTarget target)
+    {
+        if (!OperatingSystem.IsLinux())
+        {
+            return;
+        }
+
+        var launchOption = GetLinuxLaunchOption(target);
+        if (launchOption is null)
+        {
+            return;
+        }
+
+        PrintSection("Linux Launch Option");
+        PrintInfo("Steam launch options", launchOption);
+        PrintInfo("Saved note", Path.Combine(target.GameDirectory, "ABSOLUTE_STRAFTAT_LINUX_LAUNCH_OPTIONS.txt"));
+    }
+
+    private static string? GetLinuxLaunchOption(InstallTarget target)
+    {
+        return target.OperatingSystem switch
+        {
+            OperatingSystemKind.Linux => "./run_bepinex.sh %command%",
+            OperatingSystemKind.Windows => "WINEDLLOVERRIDES=\"winhttp.dll=n,b\" %command%",
+            _ => null
+        };
     }
 
     private static void PrintBanner()

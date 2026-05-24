@@ -4,6 +4,29 @@ namespace AbsoluteStraftat.Installer;
 
 internal static class ArchitectureDetector
 {
+    public static (PlatformInfo Platform, Architecture Architecture)? DetectGameBinary(string gameDirectory)
+    {
+        foreach (var executable in Directory.EnumerateFiles(gameDirectory, "*.exe", SearchOption.TopDirectoryOnly))
+        {
+            var architecture = ReadWindowsExecutableArchitecture(executable);
+            if (architecture is not null)
+            {
+                return (new PlatformInfo(OperatingSystemKind.Windows, "win"), architecture.Value);
+            }
+        }
+
+        foreach (var file in Directory.EnumerateFiles(gameDirectory, "*", SearchOption.TopDirectoryOnly))
+        {
+            var architecture = ReadElfArchitecture(file);
+            if (architecture is not null)
+            {
+                return (new PlatformInfo(OperatingSystemKind.Linux, "linux"), architecture.Value);
+            }
+        }
+
+        return null;
+    }
+
     public static Architecture? Detect(string gameDirectory)
     {
         if (OperatingSystem.IsWindows())

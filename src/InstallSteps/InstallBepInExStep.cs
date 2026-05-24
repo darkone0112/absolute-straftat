@@ -11,7 +11,7 @@ internal static class InstallBepInExStep
         ZipFile.ExtractToDirectory(zipPath, extractDirectory, overwriteFiles: true);
 
         CopyDirectory(extractDirectory, target.GameDirectory);
-        MakeUnixShellScriptsExecutable(target.GameDirectory);
+        MakeUnixShellScriptsExecutable(target);
     }
 
     private static void CopyDirectory(string sourceDirectory, string destinationDirectory)
@@ -31,14 +31,14 @@ internal static class InstallBepInExStep
         }
     }
 
-    private static void MakeUnixShellScriptsExecutable(string gameDirectory)
+    private static void MakeUnixShellScriptsExecutable(InstallTarget target)
     {
-        if (OperatingSystem.IsWindows())
+        if (target.OperatingSystem != OperatingSystemKind.Linux || OperatingSystem.IsWindows())
         {
             return;
         }
 
-        foreach (var script in Directory.EnumerateFiles(gameDirectory, "*.sh", SearchOption.TopDirectoryOnly))
+        foreach (var script in Directory.EnumerateFiles(target.GameDirectory, "*.sh", SearchOption.TopDirectoryOnly))
         {
             File.SetUnixFileMode(script, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute
                 | UnixFileMode.GroupRead | UnixFileMode.GroupExecute
