@@ -109,6 +109,7 @@ The updater helper is called `bonjour`, but the release is Absolute STRAFTAT bec
 | Date | Name | Message |
 |---|---|---|
 <!-- GUESTBOOK:START -->
+| 2026-05-24 | xx_strafffer2007_xx | I installed the installer and the installer installed me |
 | 1999-12-31 | site admin | first. this table has legal weight in zero jurisdictions. |
 <!-- GUESTBOOK:END -->
 
