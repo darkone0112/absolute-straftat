@@ -9,6 +9,13 @@ reference/
 *.png
 *.ico
 *.icns
+!assets/
+!assets/*.gif
+!assets/*.jpg
+!assets/*.jpeg
+!assets/*.png
+!assets/*.ico
+!assets/*.icns
 *.user
 *.suo
 .vs/

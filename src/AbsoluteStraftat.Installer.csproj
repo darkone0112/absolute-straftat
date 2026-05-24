@@ -18,14 +18,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\absolute.straftat.jpg" LogicalName="absolute.straftat.jpg" />
-    <EmbeddedResource Include="..\absolute.straftat.gif" LogicalName="absolute.straftat.gif" />
-    <EmbeddedResource Include="..\background.png" LogicalName="background.png" />
-    <EmbeddedResource Include="..\border.gif" LogicalName="border.gif" />
-    <EmbeddedResource Include="..\communication.gif" LogicalName="communication.gif" />
-    <EmbeddedResource Include="..\exit.gif" LogicalName="exit.gif" />
-    <EmbeddedResource Include="..\hop-on-straftat-straftat.gif" LogicalName="hop-on-straftat-straftat.gif" />
-    <EmbeddedResource Include="..\straftat-ico.jpg" LogicalName="straftat-ico.jpg" />
+    <EmbeddedResource Include="..\assets\absolute.straftat.jpg" LogicalName="absolute.straftat.jpg" />
+    <EmbeddedResource Include="..\assets\absolute.straftat.gif" LogicalName="absolute.straftat.gif" />
+    <EmbeddedResource Include="..\assets\background.png" LogicalName="background.png" />
+    <EmbeddedResource Include="..\assets\border.gif" LogicalName="border.gif" />
+    <EmbeddedResource Include="..\assets\communication.gif" LogicalName="communication.gif" />
+    <EmbeddedResource Include="..\assets\exit.gif" LogicalName="exit.gif" />
+    <EmbeddedResource Include="..\assets\hop-on-straftat-straftat.gif" LogicalName="hop-on-straftat-straftat.gif" />
+    <EmbeddedResource Include="..\assets\straftat-ico.jpg" LogicalName="straftat-ico.jpg" />
   </ItemGroup>
 
   <ItemGroup>
