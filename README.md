@@ -2,16 +2,22 @@
 
 <table>
   <tr>
-    <td>
+    <td width="260" align="center">
       <a href="https://github.com/darkone0112/absolute-straftat/releases/latest/download/absolute-straftat-installer.exe">
-        <img src="assets/absolute.straftat.gif" width="230" alt="Download for Windows">
+        <img src="assets/microslop.jpg" width="96" alt="Windows">
+      </a><br>
+      <a href="https://github.com/darkone0112/absolute-straftat/releases/latest/download/absolute-straftat-installer.exe">
+        <img src="assets/download.gif" width="160" alt="Download for Windows">
       </a><br>
       <b>WINDOWS .EXE</b>
     </td>
     <td width="40"></td>
-    <td>
+    <td width="260" align="center">
       <a href="https://github.com/darkone0112/absolute-straftat/releases/latest/download/absolute-straftat-installer">
-        <img src="assets/absolute.straftat.gif" width="230" alt="Download for Linux">
+        <img src="assets/tux.jpg" width="96" alt="Linux">
+      </a><br>
+      <a href="https://github.com/darkone0112/absolute-straftat/releases/latest/download/absolute-straftat-installer">
+        <img src="assets/download.gif" width="160" alt="Download for Linux">
       </a><br>
       <b>LINUX</b>
     </td>
@@ -29,7 +35,7 @@
     <td><img src="assets/blue_flame_skull.gif" width="92" alt=""></td>
     <td>
       <img src="assets/bg.jpg" width="620" alt=""><br>
-      <img src="assets/absolute.straftat.jpg" width="430" alt="Absolute STRAFTAT">
+      <img src="assets/absolute.straftat.jpg" width="380" alt="Absolute STRAFTAT">
     </td>
     <td><img src="assets/dino-magic-ball.gif" width="92" alt=""></td>
   </tr>
@@ -65,8 +71,8 @@
 
 <table>
   <tr>
-    <td><img src="assets/blue_flame_skull.gif" width="110" alt=""></td>
-    <td>
+    <td width="90"><img src="assets/blue_flame_skull.gif" width="80" alt=""></td>
+    <td width="520">
 
 ## WHAT IS THIS
 
@@ -75,7 +81,7 @@ Absolute STRAFTAT is the installer that does the folder chores while you stand n
 It finds STRAFTAT, checks whether the required mod pile is already there, downloads only what is missing, and places the files into `BepInEx/plugins` with the confidence of a printer that has never jammed.
 
     </td>
-    <td><img src="assets/dino-magic-ball.gif" width="110" alt=""></td>
+    <td width="90"><img src="assets/dino-magic-ball.gif" width="80" alt=""></td>
   </tr>
 </table>
 
@@ -88,23 +94,24 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
 
 <table>
   <tr>
-    <td><img src="assets/earth-world-spinning.gif" width="96" alt=""></td>
-    <td>
+    <td width="70"><img src="assets/earth-world-spinning.gif" width="64" alt=""></td>
+    <td width="560">
 
 ## HOW TO USE IT WITHOUT BECOMING A SYSTEM ADMINISTRATOR
 
-| Step | Official Instruction | What You Actually Do |
-|---|---|---|
-| 1 | Select your executable specimen | Click the Windows or Linux download button at the top |
-| 2 | Place it somewhere emotionally stable | Downloads folder is acceptable; desktop is very legal |
-| 3 | Run the installer | Double click on Windows, run the Linux file on Linux |
-| 4 | If STRAFTAT is not found | Paste the game folder when asked, like a responsible witness |
-| 5 | Wait briefly | The installer checks files, downloads missing items, and avoids speeches |
-| 6 | Close the popup | Press the animated button after the page has made its point |
-| 7 | Launch STRAFTAT | Observe results; do not negotiate with the plugins folder |
+<table>
+  <tr><th width="40">#</th><th width="190">Instruction</th><th width="300">Actual behavior</th></tr>
+  <tr><td>1</td><td>Pick your system</td><td>Use Windows or Linux at the top.</td></tr>
+  <tr><td>2</td><td>Download</td><td>Click the download GIF. It is legally a button.</td></tr>
+  <tr><td>3</td><td>Run it</td><td>Double click on Windows. Run the file on Linux.</td></tr>
+  <tr><td>4</td><td>Answer folder question</td><td>If asked, paste the STRAFTAT folder.</td></tr>
+  <tr><td>5</td><td>Wait</td><td>Missing files get installed. Existing files get respected.</td></tr>
+  <tr><td>6</td><td>Close popup</td><td>Press the animated button after it finishes performing.</td></tr>
+  <tr><td>7</td><td>Play</td><td>Launch STRAFTAT and observe the paperwork.</td></tr>
+</table>
 
     </td>
-    <td><img src="assets/tallbike-001.gif" width="96" alt=""></td>
+    <td width="70"><img src="assets/tallbike-001.gif" width="64" alt=""></td>
   </tr>
 </table>
 
@@ -118,23 +125,24 @@ It finds STRAFTAT, checks whether the required mod pile is already there, downlo
 
 <table>
   <tr>
-    <td><img src="assets/ohoh.gif" width="120" alt=""></td>
-    <td>
+    <td width="80"><img src="assets/ohoh.gif" width="72" alt=""></td>
+    <td width="560">
 
 ## WHAT THIS INSTALLS
 
-| Object | Official Folder Opinion |
-|---|---|
-| BepInEx | Required plumbing with a badge |
-| Mod Menu | The menu that admits things are happening |
-| moreStrafts | Additional STRAFTAT behavior, documented by vibes |
-| Straftat GunGame | A procedure for weapon bureaucracy |
-| MoreStrafts UISpawnAddon | Button-adjacent decisions |
-| Fancy | Visual manners |
-| Straftat Cosmetics Bundle IC | Wardrobe evidence |
+<table>
+  <tr><th width="230">Object</th><th width="300">Official folder opinion</th></tr>
+  <tr><td>BepInEx</td><td>Required plumbing with a badge.</td></tr>
+  <tr><td>Mod Menu</td><td>The menu that admits things are happening.</td></tr>
+  <tr><td>moreStrafts</td><td>Additional STRAFTAT behavior.</td></tr>
+  <tr><td>Straftat GunGame</td><td>A procedure for weapon bureaucracy.</td></tr>
+  <tr><td>MoreStrafts UISpawnAddon</td><td>Button-adjacent decisions.</td></tr>
+  <tr><td>Fancy</td><td>Visual manners.</td></tr>
+  <tr><td>Straftat Cosmetics Bundle IC</td><td>Wardrobe evidence.</td></tr>
+</table>
 
     </td>
-    <td><img src="assets/blue_flame_skull.gif" width="120" alt=""></td>
+    <td width="80"><img src="assets/blue_flame_skull.gif" width="72" alt=""></td>
   </tr>
 </table>
 
